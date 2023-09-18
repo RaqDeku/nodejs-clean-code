@@ -1,0 +1,16 @@
+{
+  "env": {
+    "node": true,
+    "jest": true,
+    "es2021": true
+  },
+  "extends": ["prettier", "airbnb-base"],
+  "plugins": ["prettier"],
+  "rules": {
+    "linebreak-style": ["error", "windows"],
+    "no-unused-vars": "warn",
+    "no-console": "warn",
+    "prettier/prettier": "warn",
+    "func-names": "off"
+  }
+}
