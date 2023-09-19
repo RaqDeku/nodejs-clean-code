@@ -1,8 +1,8 @@
-// const express = require('express');
-
-const startServer = ({ express }) => {
+const startServer = ({ express, routes }) => {
   const app = express();
+  app.use(express.json());
 
+  routes(app);
   return app;
 };
 
