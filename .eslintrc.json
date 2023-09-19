@@ -10,7 +10,7 @@
     "linebreak-style": ["error", "windows"],
     "no-unused-vars": "warn",
     "no-console": "warn",
-    "prettier/prettier": "warn",
+    // "prettier/prettier": "warn",
     "func-names": "off"
   }
 }
