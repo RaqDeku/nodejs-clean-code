@@ -12,6 +12,8 @@
     "no-console": "warn",
     // "prettier/prettier": "warn",
     "func-names": "off",
-    "consistent-return": "off"
+    "consistent-return": "off",
+    "no-underscore-dangle": "off",
+    "no-useless-constructor": "off"
   }
 }

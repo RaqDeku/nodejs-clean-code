@@ -10,6 +10,7 @@ function makeWaitlistDb({ connectDb }) {
     const result = await db.collection('waitlist').insertOne({
       ...waitlistInfo,
     });
+    return { ...waitlistInfo };
   }
 
   return Object.freeze({
