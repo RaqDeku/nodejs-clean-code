@@ -14,8 +14,7 @@ describe('join waitlist', () => {
     const addMemberToWaitlist = joinWaitlist({ waitlistDb });
     const inserted = await addMemberToWaitlist(newEmail);
     expect(inserted).toMatchObject({
-      // _id: '650b5849ea52cce43332110f',
-      createdOn: 1695242313234,
+      new: false,
       email: 'dekuraquib@gmail.com ',
     });
   });
