@@ -2,7 +2,7 @@ function makeWaitlistDb({ connectDb }) {
   async function findByEmail({ email }) {
     const db = await connectDb();
     const member = await db.collection('waitlist').findOne({ email });
-    return member ? { email, new: false } : null;
+    return member && { email, new: false };
   }
 
   async function insert({ ...waitlistInfo }) {
@@ -10,7 +10,7 @@ function makeWaitlistDb({ connectDb }) {
     const result = await db.collection('waitlist').insertOne({
       ...waitlistInfo,
     });
-    return result ? { ...waitlistInfo.emai, new: true } : null;
+    return result && { ...waitlistInfo.email, new: true };
   }
 
   return Object.freeze({
