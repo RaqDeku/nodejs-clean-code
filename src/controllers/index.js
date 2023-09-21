@@ -1,10 +1,13 @@
 const makeJoinWaitlist = require('./join-waitlist');
-const { addMemberToWaitlist } = require('../use-cases/index');
+const makeSendMessage = require('./send-message');
+const { addMemberToWaitlist, sendMessage } = require('../use-cases/index');
 
 const joinWaitlist = makeJoinWaitlist({ addMemberToWaitlist });
+const forwardMessage = makeSendMessage({ sendMessage });
 
 const controller = Object.freeze({
   joinWaitlist,
+  forwardMessage,
 });
 
 module.exports = controller;
