@@ -1,5 +1,10 @@
 function buildSendMessage() {
-  return function sendMessage({ email, name, message }) {
+  return function sendMessage({
+    email,
+    name,
+    message,
+    checkOption = false,
+  } = {}) {
     if (!email) {
       throw new Error('Please provide email.');
     }
@@ -13,6 +18,7 @@ function buildSendMessage() {
       getEmail: () => email,
       getName: () => name,
       getMessage: () => message,
+      getCheckOption: () => checkOption,
     });
   };
 }
