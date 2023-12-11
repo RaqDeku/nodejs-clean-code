@@ -1,3 +1,3 @@
-const subscribeToMessageBus = require('./subscribers');
+const dispatchEmailCallback = require('./core');
 
-module.exports = subscribeToMessageBus;
+module.exports = dispatchEmailCallback;

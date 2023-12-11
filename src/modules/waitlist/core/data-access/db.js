@@ -1,13 +1,13 @@
-function makeWaitlistDb({ connectDb }) {
+function makeWaitlistDb({ db }) {
   async function findByEmail({ email }) {
-    const db = await connectDb();
-    const member = await db.collection('waitlist').findOne({ email });
+    const member = await db().collection('waitlist').findOne({ email });
     return member && { email };
   }
 
   async function insert({ ...waitlistInfo }) {
-    const db = await connectDb();
-    await db.collection('waitlist').insertOne({ ...waitlistInfo });
+    await db()
+      .collection('waitlist')
+      .insertOne({ ...waitlistInfo });
   }
 
   return Object.freeze({

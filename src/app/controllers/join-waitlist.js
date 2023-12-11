@@ -1,15 +1,15 @@
-function makeJoinWaitlistController({ joinWaitlistApi }) {
+function buildJoinWaitlistController({ joinWaitlistApi }) {
   return async function joinWaitlist(httpRequest) {
-    const { ...waitlistInfo } = httpRequest.body;
-    const joined = await joinWaitlistApi({ ...waitlistInfo });
+    const { ...memberData } = httpRequest.body;
+    const { statusCode, body } = await joinWaitlistApi({ ...memberData });
     return {
       headers: {
         'Content-Type': 'application/json',
       },
-      statusCode: joined.email ? 200 : 201,
-      body: { joined },
+      statusCode,
+      body,
     };
   };
 }
 
-module.exports = makeJoinWaitlistController;
+module.exports = buildJoinWaitlistController;

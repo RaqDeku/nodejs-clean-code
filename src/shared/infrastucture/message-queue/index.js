@@ -1,3 +1,4 @@
+/* eslint-disable quote-props */
 const MessageBroker = require('./message-broker');
 const createMessageDispatcher = require('./message-dispatcher');
 const createMessageSubscriber = require('./message-subscriber');

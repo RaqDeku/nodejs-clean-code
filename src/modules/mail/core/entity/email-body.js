@@ -1,8 +1,5 @@
 function buildEmailBody({ joinedWaitlistTemplate }) {
-  return function emailBody({ recieverName = '', recieverEmail }) {
-    if (!recieverEmail) {
-      // throw error
-    }
+  return function emailBody({ recieverName, recieverEmail }) {
     const message = joinedWaitlistTemplate(recieverName);
 
     return Object.freeze({

@@ -1,13 +1,15 @@
-const { joinWaitlistApi } = require('../../modules');
-const makeJoinWaitlistController = require('./join-waitlist');
-// const makeSendMessage = require('./send-message');
+const { joinWaitlistApi, sendSuggestionMessageApi } = require('../../modules');
+const buildJoinWaitlistController = require('./join-waitlist');
+const buildSuggestionMessageController = require('./send-message');
 
-const joinWaitlist = makeJoinWaitlistController({ joinWaitlistApi });
-// const forwardMessage = makeSendMessage({ sendMessage });
+const joinWaitlist = buildJoinWaitlistController({ joinWaitlistApi });
+const sendSuggestionMessage = buildSuggestionMessageController({
+  sendSuggestionMessageApi,
+});
 
 const controller = Object.freeze({
   joinWaitlist,
-  // forwardMessage,
+  sendSuggestionMessage,
 });
 
 module.exports = controller;

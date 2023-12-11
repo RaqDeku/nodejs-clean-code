@@ -1,28 +1,17 @@
-function makeSendMessage({ sendMessageFn }) {
+function buildSuggestionMessageController({ sendSuggestionMessageApi }) {
   return async function sendMessage(httpResquest) {
-    try {
-      const { ...mesaageInfo } = httpResquest.body;
-      const sent = sendMessageFn({ ...mesaageInfo });
-      return {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        statusCode: 200,
-        body: { sent },
-      };
-    } catch (error) {
-      // TODO: error handling and logging
-      return {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        statusCode: 400,
-        body: {
-          error: error.message,
-        },
-      };
-    }
+    const { ...messageData } = httpResquest.body;
+    const { statusCode, body } = await sendSuggestionMessageApi({
+      ...messageData,
+    });
+    return {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      statusCode,
+      body,
+    };
   };
 }
 
-module.exports = makeSendMessage;
+module.exports = buildSuggestionMessageController;

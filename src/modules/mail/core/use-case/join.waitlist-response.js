@@ -1,14 +1,14 @@
 const emailBody = require('../entity');
 
 function buildEmailResponse({ stmpTransporter }) {
-  return async function sendMail({ recieverEmail, recieverName }) {
-    const email = emailBody({ recieverEmail, recieverName });
+  return async function sendMail({ email, name }) {
+    const emailToSend = emailBody({ recieverName: name, recieverEmail: email });
 
     const messageConfig = {
-      from: 'Printalise <info@printalise.com>',
-      to: `${email.getNameOfReciever()} <${email.getRecieverEmail()}>`,
+      from: 'Printalise <noreply@printalise.com>',
+      to: `${emailToSend.getNameOfReciever()} <${emailToSend.getRecieverEmail()}>`,
       subject: 'You are on the waitlist!',
-      message: email.getMessage(),
+      message: emailToSend.getMessage(),
     };
 
     await stmpTransporter.forwardMessage(messageConfig);

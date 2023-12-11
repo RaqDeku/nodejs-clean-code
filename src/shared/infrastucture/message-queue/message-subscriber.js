@@ -1,6 +1,18 @@
 function createMessageSubscriber({ queueClient }) {
-  return async function subscribe(dispatchEmail = async () => {}, topics = []) {
-    await queueClient.subscribeToTopic(dispatchEmail, topics);
+  async function triggerMessageCallback({
+    topic = '',
+    payload = {},
+    callbacks = {},
+  } = {}) {
+    return callbacks[topic]({ ...payload });
+  }
+
+  return async function (topics = [], callbacks = {}) {
+    await queueClient.subscribeToTopic({
+      topics,
+      callbacks,
+      triggerMessageCallback,
+    });
   };
 }
 

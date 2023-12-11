@@ -1,5 +1,5 @@
-const waitlistMember = require('./waitlist-member');
+const buildWaitlistMember = require('./waitlist-member');
 
-const createMember = waitlistMember();
+const createMember = buildWaitlistMember();
 
 module.exports = createMember;

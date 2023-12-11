@@ -5,7 +5,7 @@ const logger = require('../logger/logger');
 class MessageBroker {
   constructor({ clientId, brokers }) {
     this.client = new Kafka({
-      logLevel: logLevel.DEBUG,
+      // logLevel: logLevel.DEBUG,
       clientId,
       brokers,
     });
@@ -17,26 +17,44 @@ class MessageBroker {
   async connectProducer() {
     logger.info('Connecting Producer to Message Queue Broker. . .');
     await this.producer.connect();
+    logger.info('Connected Producer to Message Broker');
+
+    // logger.warn('Producer Connection Failed!');
   }
 
   async connectConsumer() {
     logger.info('Connecting Consumer to Message Queue Broker. . .');
     await this.consumer.connect();
+    logger.info('Connected Consumer to Message Broker');
+
+    // logger.warn('Consumer Connection Failed!');
   }
 
-  async sendMessage(topic, message = {}) {
-    const topics = ['waitlist_joined', 'suggestion_message'];
+  async sendMessage({ topic = '', message = {}, ...otherOptions }) {
+    const topics = ['waitlist_joined', 'suggestion_message', 'join_oncheck'];
     if (!topics.includes(topic)) {
       throw new Error('Invalid Topic');
     }
 
     await this.producer.send({
       topic,
-      messages: [{ value: JSON.stringify(message) }],
+      messages: [{ value: JSON.stringify(message), ...otherOptions }],
     });
   }
 
-  async subscribeToTopic(topics = [], dispatchEmail = async () => {}) {
+  async sendMessages(messages = []) {
+    // const topics = ['waitlist_joined', 'suggestion_message', 'join_oncheck'];
+    // if (!topics.includes(topic)) {
+    //   throw new Error('Invalid Topic');
+    // }
+    await this.producer.sendBatch({ messages });
+  }
+
+  async subscribeToTopic({
+    topics = [],
+    callbacks = {},
+    triggerMessageCallback = async () => {},
+  } = {}) {
     await this.consumer.subscribe({
       topics,
       // fromBeginning: true,
@@ -44,11 +62,9 @@ class MessageBroker {
 
     await this.consumer.run({
       eachMessage: async ({ topic, partition, message }) => {
-        const value = JSON.parse(message.value.toString());
-        await dispatchEmail({
-          recieverEmail: value.email,
-          recieverName: value.name,
-        });
+        const payload = JSON.parse(message.value.toString());
+        console.log(topic, payload);
+        await triggerMessageCallback({ topic, payload, callbacks });
       },
     });
   }

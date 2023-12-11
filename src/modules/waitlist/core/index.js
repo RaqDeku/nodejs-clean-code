@@ -1,3 +1,3 @@
-const joinWaitlistApi = require('../api/index');
+const { addMember, addMemberOnCheck } = require('./use-case');
 
-module.exports = joinWaitlistApi;
+module.exports = { addMember, addMemberOnCheck };

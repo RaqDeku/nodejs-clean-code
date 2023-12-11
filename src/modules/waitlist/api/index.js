@@ -1,5 +1,5 @@
-const addMember = require('../core/use-case');
+const { addMember, addMemberOnCheck } = require('../core');
 
 const joinWaitlistApi = ({ ...args }) => addMember({ ...args });
 
-module.exports = joinWaitlistApi;
+module.exports = { joinWaitlistApi, addMemberOnCheck };

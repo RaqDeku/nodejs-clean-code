@@ -1,4 +1,10 @@
-const subscribeToMessageBus = require('./mail');
-const joinWaitlistApi = require('./waitlist/api');
+const sendSuggestionMessageApi = require('./feedback-message');
+const dipatchEmailCallback = require('./mail');
+const { joinWaitlistApi, addMemberOnCheck } = require('./waitlist/api');
 
-module.exports = { joinWaitlistApi, subscribeToMessageBus };
+module.exports = {
+  joinWaitlistApi,
+  dipatchEmailCallback,
+  addMemberOnCheck,
+  sendSuggestionMessageApi,
+};
