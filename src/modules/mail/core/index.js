@@ -1,3 +1,6 @@
-const dispatchJoinWaitlistEmail = require('./use-case');
+const {
+  dispatchJoinWaitlistEmail,
+  forwardSuggestionMessageEmail,
+} = require('./use-case');
 
-module.exports = dispatchJoinWaitlistEmail;
+module.exports = { dispatchJoinWaitlistEmail, forwardSuggestionMessageEmail };

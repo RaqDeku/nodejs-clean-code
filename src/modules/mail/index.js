@@ -1,3 +1,6 @@
-const dispatchJoinWaitlistEmail = require('./core');
+const {
+  dispatchJoinWaitlistEmail,
+  forwardSuggestionMessageEmail,
+} = require('./core');
 
-module.exports = dispatchJoinWaitlistEmail;
+module.exports = { dispatchJoinWaitlistEmail, forwardSuggestionMessageEmail };

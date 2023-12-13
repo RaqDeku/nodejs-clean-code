@@ -1,6 +1,15 @@
 const buildEmailBody = require('./email-body');
-const { joinedWaitlistTemplate } = require('../templates');
+const {
+  joinedWaitlistTemplate,
+  suggestionMessageTemplate,
+} = require('../templates');
 
-const emailBody = buildEmailBody({ joinedWaitlistTemplate });
+const emailBody = buildEmailBody({
+  joinedWaitlistTemplate,
+  suggestionMessageTemplate,
+});
 
-module.exports = emailBody;
+const joinWaitlistEmailBody = emailBody.buildjoinWaitlistEmail;
+const suggestionMessageEmailBody = emailBody.buildSuggesstionMessageEmail;
+
+module.exports = { joinWaitlistEmailBody, suggestionMessageEmailBody };

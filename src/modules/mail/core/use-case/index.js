@@ -1,8 +1,11 @@
-const buildJoinWaitlistEmailResponse = require('./join.waitlist-response');
+const buildEmailResponses = require('./send-responses');
 const { stmpTransporter } = require('../../../../shared');
 
-const dispatchJoinWaitlistEmail = buildJoinWaitlistEmailResponse({
+const emailResponses = buildEmailResponses({
   stmpTransporter,
 });
 
-module.exports = dispatchJoinWaitlistEmail;
+const dispatchJoinWaitlistEmail = emailResponses.sendJoinWaistEmailResponse;
+const forwardSuggestionMessageEmail = emailResponses.forwardSuggestionMessage;
+
+module.exports = { dispatchJoinWaitlistEmail, forwardSuggestionMessageEmail };
