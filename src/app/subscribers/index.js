@@ -1,8 +1,12 @@
-const { dipatchEmailCallback, addMemberOnCheck } = require('../../modules');
+const {
+  dispatchJoinWaitlistEmail,
+  addMemberOnCheck,
+} = require('../../modules');
 const { messageSubscriber } = require('../../shared');
 
 const callbacks = {
-  waitlist_joined: async ({ ...args }) => dipatchEmailCallback({ ...args }),
+  waitlist_joined: async ({ ...args }) =>
+    dispatchJoinWaitlistEmail({ ...args }),
   join_oncheck: async ({ ...args }) => addMemberOnCheck({ ...args }),
 };
 

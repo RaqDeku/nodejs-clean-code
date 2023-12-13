@@ -1,6 +1,6 @@
 const emailBody = require('../entity');
 
-function buildEmailResponse({ stmpTransporter }) {
+function buildJoinWaitlistEmailResponse({ stmpTransporter }) {
   return async function sendMail({ email, name }) {
     const emailToSend = emailBody({ recieverName: name, recieverEmail: email });
 
@@ -15,4 +15,4 @@ function buildEmailResponse({ stmpTransporter }) {
   };
 }
 
-module.exports = buildEmailResponse;
+module.exports = buildJoinWaitlistEmailResponse;

@@ -1,3 +1,3 @@
-const dispatchEmailCallback = require('./core');
+const dispatchJoinWaitlistEmail = require('./core');
 
-module.exports = dispatchEmailCallback;
+module.exports = dispatchJoinWaitlistEmail;
