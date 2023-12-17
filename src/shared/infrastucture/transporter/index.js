@@ -15,8 +15,8 @@ function transporter() {
     host: 'sandbox.smtp.mailtrap.io',
     port: 2525,
     auth: {
-      user: 'aeefcdf783e806',
-      pass: '88f99bc380935e',
+      user: '',
+      pass: '',
     },
   };
   return nodemailer.createTransport(config);
