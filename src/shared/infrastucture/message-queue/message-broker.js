@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
-const { Kafka, logLevel } = require('kafkajs');
-const logger = require('../logger/logger');
+const { Kafka, logLevel } = require("kafkajs");
+const logger = require("../logger/logger");
 
 class MessageBroker {
   constructor({ clientId, brokers }) {
@@ -11,29 +11,41 @@ class MessageBroker {
     });
 
     this.producer = this.client.producer();
-    this.consumer = this.client.consumer({ groupId: 'email' });
+    this.consumer = this.client.consumer({ groupId: "email" });
   }
 
   async connectProducer() {
-    logger.info('Connecting Producer to Message Queue Broker. . .');
+    logger.info("Connecting Producer to Message Queue Broker. . .");
     await this.producer.connect();
-    logger.info('Connected Producer to Message Broker');
+    logger.info("Connected Producer to Message Broker");
 
     // logger.warn('Producer Connection Failed!');
   }
 
+  async disconnectProducer() {
+    logger.info("Disconnecting Producer from Message Queue Broker. . .");
+    await this.producer.disconnect();
+    logger.info("*****Disonnected Producer******");
+  }
+
   async connectConsumer() {
-    logger.info('Connecting Consumer to Message Queue Broker. . .');
+    logger.info("Connecting Consumer to Message Queue Broker. . .");
     await this.consumer.connect();
-    logger.info('Connected Consumer to Message Broker');
+    logger.info("Connected Consumer to Message Broker");
 
     // logger.warn('Consumer Connection Failed!');
   }
 
-  async sendMessage({ topic = '', message = {}, ...otherOptions }) {
-    const topics = ['waitlist_joined', 'suggestion_message', 'join_oncheck'];
+  async disconnectConsumer() {
+    logger.info("Disconnecting Consumer from Message Queue Broker. . .");
+    await this.consumer.disconnect();
+    logger.info("*****Disconnected Consumer*****");
+  }
+
+  async sendMessage({ topic = "", message = {}, ...otherOptions }) {
+    const topics = ["waitlist_joined", "suggestion_message", "join_oncheck"];
     if (!topics.includes(topic)) {
-      throw new Error('Invalid Topic');
+      throw new Error("Invalid Topic");
     }
 
     await this.producer.send({

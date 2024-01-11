@@ -1,7 +1,6 @@
-const startServer = ({
-  express, routes, errorHandler, logger,
-}) => {
+const startServer = ({ express, routes, errorHandler, logger, helmet }) => {
   const app = express();
+  app.use(helmet());
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
 
